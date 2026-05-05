@@ -1,0 +1,42 @@
+---
+title: "summary_analysis"
+format: html
+editor: visual
+---
+
+# Summary Analysis
+
+## Plotting Results
+
+```{r}
+library(ggplot2) 
+jan_plot <- ggplot(jan_data, aes(x=year, y=temp_C, color=site_no))+ 
+  geom_point(alpha = 0.3, size =1)+ 
+  geom_smooth(method="glm", se=TRUE)+ 
+  labs(title= "January Temperature Trends Over Time by Site", 
+       x="Year", y="Temperature (ºC)", color = "Site")+ 
+  theme_minimal()
+```
+
+```{r}
+library(ggplot2) 
+jul_plot <- ggplot(july_data, aes(x=year, y=temp_C, color=site_no))+ 
+  geom_point(alpha = 0.3, size =1)+ geom_smooth(method="glm", se=TRUE)+ 
+  labs(title= "July Temperature Trends Over Time by Site", 
+       x="Year", y="Temperature (ºC)", color = "Site")+ 
+  theme_minimal()
+```
+
+```{r}
+jan_plot + jul_plot
+```
+
+## Analysis of findings
+
+We compared the rate annual water temperature increase across the three sites in January and July. Fitting a Generalized Linear model to the data, we were able to compare whether warming trends were significantly different compared to site 14166000 (baseline).
+
+In January, though the baseline site was initially the warmest, both of the other sites exhibited a rate of warming significantly faster than than the baseline. By 2018, site 14211720 surpassed the baseline site as the warmest.
+
+In July, the baseline site was initially the coolest and remained so for the duration of the study period. Though site 1411720 had a warmer temperature than the baseline, the rate of warming was not significantly different. On the other hand, site 14211010 was initially exhibited similar temperature to the baseline site, but exhibited a rate of warming significantly faster than the baseline, causing the temperatures to diverge over the course of the study period.
+
+In summary, all sites exhibited warming trends. In January, sites 14211720 & 14211010 exhibit warming trends faster than the baseline. In July, site 14211720 is warming at a similar rate to the baseline, whereas site 14211010 is warming faster.

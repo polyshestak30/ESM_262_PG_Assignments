@@ -4,12 +4,15 @@ format: html
 editor: visual
 ---
 
-## Assignment 2
+# Assignment 2
+
+## Loading data and exploration
 
 ```{r}
 install.packages("dataRetrieval")
 library(dataRetrieval)
 library(tidyverse)
+library(patchwork)
 ```
 
 ```{r}
@@ -34,8 +37,4 @@ ggplot(temp_data, aes(x=Date, y=temp_C, color=site_no)) +
   labs(title="Stream Temperature at Willamette River Sites",
        x="Date", y="Temperature (°C)", color="Site Number") +
   theme_minimal()
-```
-
-```{r}
-temp_data
 ```
