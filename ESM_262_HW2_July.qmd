@@ -1,0 +1,16 @@
+---
+title: "ESM_262_HW2_July"
+format: html
+editor: visual
+---
+
+## July Analysis
+
+```{r}
+library(tidyverse)
+# filter for July temperatures
+july_data <- subset(temp_data, month == "Jul")
+# fit a GLM model to see if there is a trend in July temperatures over time, separated by site
+july_model <- glm(temp_C ~ year*site_no, data = july_data)
+summary(july_model)
+```
