@@ -1,0 +1,14 @@
+---
+title: "jan"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+# filter for July temps
+jan_data <- subset(temp_data, month == "Jan")
+# fit a GLM model to see if there is a trend in Jul temps over time
+jan_model <- glm(temp_C ~ year*site_no, data = jan_data)
+summary(jan_model)
+```
