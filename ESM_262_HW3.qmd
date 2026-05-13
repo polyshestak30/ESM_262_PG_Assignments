@@ -7,3 +7,48 @@ editor: visual
 ## Assignment 3
 
 hello
+
+Part 1.
+
+```{r}
+# Create sequence of days
+day <- 1:365
+
+# Generate realistic daily PM2.5 values (urban air quality)
+# Average around 18 µg/m³ with some variability
+pm25 <- rnorm(365, mean = 18, sd = 6)
+
+# Prevent negative values
+pm25 <- pmax(pm25, 0)
+
+# Create season factor based on day number
+season <- ifelse(day <= 90, "winter",
+          ifelse(day <= 180, "spring",
+          ifelse(day <= 270, "summer", "fall")))
+
+season <- as.factor(season)
+
+# Create empty risk column
+risk <- NA
+
+# Combine into data frame
+air_quality <- data.frame(
+  day = day,
+  pm25 = pm25,
+  season = season,
+  risk = risk
+)
+
+# View first few rows
+head(air_quality)
+```
+
+Part 2.
+
+```{r}
+#initializing
+current_unhealthy_streak <- 0 
+max_unhealthy_streak <- 0
+
+
+```
