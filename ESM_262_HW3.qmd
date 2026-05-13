@@ -113,7 +113,7 @@ ggplot(air_quality, aes(x = day, y = pm25, color = season)) +
   labs(title = sprintf("Daily PM2.5 Concentrations; Max Unhealthy Streak = %s Days",
                        max_unhealthy_streak),
        x = "Day of Year",
-       y = "PM2.5 Concentration (ug/m^3)",
+       y = "PM2.5 Concentration (µg/m³)",
        color = "Season")
 
 ggplot(air_quality, aes(x = risk)) +
@@ -123,3 +123,5 @@ ggplot(air_quality, aes(x = risk)) +
        y = "Number of Days") +
   theme_bw()
 ```
+
+The simulated PM2.5 concentrations remained mostly within the moderate air quality range throughout the year, although there were several small spikes that exceeded the unhealthy threshold of 35.4 µg/m³. Winter experienced the greatest number of unhealthy air quality days (4), followed by summer (3), spring (2), and fall (1). Summer also showed several elevated PM2.5 spikes, which may represent wildfire smoke during hot and dry months. Although the maximum consecutive unhealthy streak was only two days, short term exposure to high levels of particulate matter can negatively impact human health. Continued air monitoring is important for reducing exposure risks, especially during wildfire season.
