@@ -16,7 +16,7 @@ day <- 1:365
 
 # Generate realistic daily PM2.5 values (urban air quality)
 # Average around 18 µg/m³ with some variability
-pm25 <- rnorm(365, mean = 18, sd = 6)
+pm25 <- rnorm(365, mean = 18, sd = 9)
 
 # Prevent negative values
 pm25 <- pmax(pm25, 0)
@@ -50,5 +50,74 @@ Part 2.
 current_unhealthy_streak <- 0 
 max_unhealthy_streak <- 0
 
+#risk column
+for(i in 1:nrow(air_quality)) {
+  air_quality$risk[i] <- ifelse(
+    air_quality$pm25[i] < 12, "good",
+    ifelse(air_quality$pm25[i] <= 35.4, "moderate", "unhealthy")
+  )
+ #consequtive unhealthy days
+if(air_quality$risk[i] == "unhealthy") {
+  current_unhealthy_streak <- current_unhealthy_streak + 1
+  if(current_unhealthy_streak > max_unhealthy_streak) {
+    max_unhealthy_streak <- current_unhealthy_streak
+  }
+} else {
+  current_unhealthy_streak <- 0
+} 
+}
 
+
+head(air_quality)
+max_unhealthy_streak
+air_quality
+
+```
+
+```{r}
+#number of unhealthy days in each season
+
+#initialize 
+winter_unhealthy <- 0
+spring_unhealthy <- 0
+summer_unhealthy <- 0
+fall_unhealthy <- 0
+
+for(i in 1:nrow(air_quality)) {
+  if (air_quality$risk[i] == "unhealthy") {
+    if (air_quality$season[i] == "winter") {
+      winter_unhealthy <- winter_unhealthy + 1
+    } else if (air_quality$season[i] == "spring") {
+      spring_unhealthy <- spring_unhealthy + 1
+    } else if (air_quality$season[i] == "summer") {
+      summer_unhealthy <- summer_unhealthy + 1
+    } else {
+      fall_unhealthy <- fall_unhealthy <- 1
+    }
+  }
+}
+
+winter_unhealthy
+spring_unhealthy
+summer_unhealthy
+fall_unhealthy
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(air_quality, aes(x = day, y = pm25, color = season)) +
+  geom_line()+
+  labs(title = sprintf("Daily PM2.5 Concentrations; Max Unhealthy Streak = %s Days",
+                       max_unhealthy_streak),
+       x = "Day of Year",
+       y = "PM2.5 Concentration (ug/m^3)",
+       color = "Season")
+
+ggplot(air_quality, aes(x = risk)) +
+  geom_bar() +
+  labs(title = sprintf("Number of Days per Risk Category; Max Unhealthy Streak = %s Days", max_unhealthy_streak),
+       x = "Risk Category",
+       y = "Number of Days") +
+  theme_bw()
 ```
