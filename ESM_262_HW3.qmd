@@ -4,11 +4,9 @@ format: html
 editor: visual
 ---
 
-## Assignment 3
+# Assignment 3
 
-hello
-
-Part 1.
+## Part 1.
 
 ```{r}
 # Create sequence of days
@@ -43,7 +41,7 @@ air_quality <- data.frame(
 head(air_quality)
 ```
 
-Part 2.
+## Part 2.
 
 ```{r}
 #initializing
@@ -74,6 +72,8 @@ air_quality
 
 ```
 
+## Part 3.
+
 ```{r}
 #number of unhealthy days in each season
 
@@ -102,6 +102,8 @@ spring_unhealthy
 summer_unhealthy
 fall_unhealthy
 ```
+
+## Part 4.
 
 ```{r}
 library(ggplot2)
