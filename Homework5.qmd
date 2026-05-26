@@ -8,7 +8,7 @@ format:
 editor: visual
 ---
 
-## Step 1: Planning 
+## Step 1: Planning
 
 Module 1 - Fertilizer Suitability Score
 
