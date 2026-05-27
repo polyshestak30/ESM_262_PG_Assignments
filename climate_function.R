@@ -6,7 +6,7 @@
 #' Module 2 - Climate
 #' 
 #' @param precip annual precipitation (in/yr)
-#' @param temp mean growing season temp (C)
+#' @param temp mean growing season temp (F)
 #' @return climate_score - climate suitability score (0 to 5 in/yr)
 #' 
 #' precip (optimal = 20-30in/yr)
