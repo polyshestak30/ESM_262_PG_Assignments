@@ -5,7 +5,7 @@
 
 #' Module 3 - Soil Health Score
 #' @param ph soil pH (0 to 14)
-#' @param soil_om soil om content (%)
+#' @param soil_om soil_om soil organic matter proportion (0 to 1)
 #' @return soil_health_score - soil health suitability score (0 to 4 in/yr)
 #' 
 #' soil_health_score <- function(ph, soil_om) {
@@ -22,10 +22,10 @@ soil_health_score <- function(ph, soil_om) {
     ph_score <- 1
   }
   
-  # soil organic matter (optimal = 3-6%)
-  if (soil_om < 1) {
+  # soil organic matter (optimal = 0.03-0.06)
+  if (soil_om < 0.01) {
     om_score <- 0
-  } else if (soil_om >= 3 & soil_om <= 6) {
+  } else if (soil_om >= 0.03 & soil_om <= 0.06) {
     om_score <- 2
   } else {
     om_score <- 1
