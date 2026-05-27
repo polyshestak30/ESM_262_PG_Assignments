@@ -134,3 +134,34 @@ Overall Program
 #' @return tomato_growth - predicted tomato crop growth (0 to 12 in/yr)
 #'
 ```
+
+Test
+
+```{r}
+library(truncnorm)
+
+# Plant growth data
+plant_growth_data <- data.frame(
+  sample_num = 1:20,
+  nitrogen = rtruncnorm(20, a = 0, b = 400, mean = 70, sd = 100),
+  phosphorus = rtruncnorm(20, a = 0, b = 150, mean = 20, sd = 30),
+  precip = rtruncnorm(20, a = 4, b = 30, mean = 8, sd = 6),
+  temp = rtruncnorm(20, a = 45, b = 85, mean = 70, sd = 8),
+  ph = rtruncnorm(20, a = 3.5, b = 10, mean = 6, sd = 1),
+  soil_om = rtruncnorm(20, a = 0.01, b = 0.1, mean = 0.04, sd= 0.03))
+
+# Fertilizer score
+plant_growth_data$fertilizer_score <- mapply(fertilizer_score, plant_growth_data$nitrogen, plant_growth_data$phosphorus)
+plant_growth_data
+
+# Climate score
+plant_growth_data$climate_score <- mapply(climate_score, plant_growth_data$precip, plant_growth_data$temp)
+plant_growth_data
+
+# Soil health score
+
+# Annual tomoato crop growth
+
+
+
+```
