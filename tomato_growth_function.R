@@ -9,3 +9,10 @@
 #' @param climate_score climate suitability score (0 to 5 in/yr)
 #' @param soil_health_score soil health score (0 to 4in/yr)
 #' @return tomato_growth - predicted tomato crop growth (0-12 in/yr)
+#' 
+tomato_growth <- function(fertilizer_score, climate_score, soil_health_score) {
+
+tomato_growth <- fertilizer_score + climate_score + soil_health_score
+
+return(tomato_growth)
+}
