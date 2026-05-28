@@ -1,0 +1,99 @@
+---
+title: "Homework 5: Tomato Crop Growth Prediction"
+author: "Emma Sayre, Georgia Goldsmith, Poly Shestak"
+date: "May 18, 2026"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+#### Load Modules
+
+```{r}
+#| label: load_modules
+#| include: true
+#| echo: true
+#| message: false
+
+source("fertilizer_function.R")
+source("soil_health_function.R")
+source("climate_function.R")
+source("tomato_growth_function.R")
+source("overall_program_function.R")
+
+```
+
+#### Generate Data & Run Program 
+
+```{r}
+#| label: run-program
+#| include: true
+#| echo: true
+#| message: false
+
+
+library(truncnorm)
+
+# Plant growth data
+plant_growth_data <- data.frame(
+  plant_ID = 1:20,
+  nitrogen = rtruncnorm(20, a = 0, b = 400, mean = 70, sd = 100),
+  phosphorus = rtruncnorm(20, a = 0, b = 150, mean = 20, sd = 30),
+  precip = rtruncnorm(20, a = 4, b = 30, mean = 8, sd = 6),
+  temp = rtruncnorm(20, a = 45, b = 85, mean = 70, sd = 8),
+  ph = rtruncnorm(20, a = 3.5, b = 10, mean = 6, sd = 1),
+  soil_om = rtruncnorm(20, a = 0.01, b = 0.1, mean = 0.04, sd= 0.03))
+
+# Fertilizer score
+plant_growth_data$fertilizer_score <- mapply(fertilizer_score, plant_growth_data$nitrogen, plant_growth_data$phosphorus)
+plant_growth_data
+
+# Climate score
+plant_growth_data$climate_score <- mapply(climate_score, plant_growth_data$precip, plant_growth_data$temp)
+plant_growth_data
+
+# Soil health score
+plant_growth_data$soil_health_score <- mapply(
+  soil_health_score,
+  plant_growth_data$ph,
+  plant_growth_data$soil_om
+)
+
+plant_growth_data
+
+# Annual tomoato crop growth
+plant_growth_data$tomato_growth <- mapply(
+  predict_tomato_growth,
+  plant_growth_data$nitrogen,
+  plant_growth_data$phosphorus,
+  plant_growth_data$precip,
+  plant_growth_data$temp,
+  plant_growth_data$ph,
+  plant_growth_data$soil_om
+)
+
+head(plant_growth_data)
+```
+
+**Plot Results**
+
+```{r}
+#| label: run-program
+#| include: true
+#| echo: true
+#| message: false
+
+library(ggplot2)
+library(tidyverse)
+
+plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) + 
+  geom_point(color="red") +
+  labs(
+  title = "Tomato Plant Growth in 2025",
+  x = "Tomato Plant ID",
+  y = "Total Growth (in)") +
+  theme_bw()
+
+plant_growth_plot
+```
