@@ -24,7 +24,7 @@ source("overall_program_function.R")
 
 ```
 
-#### Generate Data & Run Program 
+#### Generate Data & Run Program
 
 ```{r}
 #| label: run-program
@@ -89,6 +89,7 @@ library(tidyverse)
 
 plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) + 
   geom_point(color="red") +
+  geom_line(color="grey") +
   labs(
   title = "Tomato Plant Growth in 2025",
   x = "Tomato Plant ID",
