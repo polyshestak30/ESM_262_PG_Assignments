@@ -11,8 +11,16 @@
 #' @return tomato_growth - predicted tomato crop growth (0-12 in/yr)
 #' 
 tomato_growth <- function(fertilizer_score, climate_score, soil_health_score) {
-
-tomato_growth <- fertilizer_score + climate_score + soil_health_score
-
-return(tomato_growth)
+  
+  growth_factors <- c(fertilizer_score,
+                      climate_score,
+                      soil_health_score)
+  
+  tomato_growth <- 0
+  
+  for(i in 1:length(growth_factors)) {
+    tomato_growth <- tomato_growth + growth_factors[i]
+  }
+  
+  return(tomato_growth)
 }
