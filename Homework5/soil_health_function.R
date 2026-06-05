@@ -12,7 +12,9 @@
 
 # pH (optimal = 6-7)
 soil_health_score <- function(ph, soil_om) {
-  
+  if (ph < 0 | ph > 14) {
+    stop("pH must be between 0 and 14")
+  }
   # pH (optimal = 6-7)
   if (ph < 5 | ph > 8) {
     ph_score <- 0

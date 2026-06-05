@@ -10,7 +10,12 @@
 #' @return fertilizer_score - fertilizer suitability score (0 to 3 in/yr)
 #' 
 #' nitrogen: optimal 100-200 kg/ha
+
 fertilizer_score <- function(nitrogen, phosphorus) {
+  
+  if (any(is.na(c(nitrogen, phosphorus)))) {
+    stop("Missing input value")
+  }
   
   if (nitrogen < 50 | nitrogen > 300) {
     n_score <- 0
@@ -23,7 +28,7 @@ fertilizer_score <- function(nitrogen, phosphorus) {
   if (phosphorus < 10 | phosphorus > 120) {
     p_score <- 0
   } else if (phosphorus >= 30 & phosphorus <= 80) {
-    p_score <- 1.5 
+    p_score <- 1.5
   } else {
     p_score <- 0.75
   }
