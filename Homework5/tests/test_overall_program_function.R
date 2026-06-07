@@ -1,5 +1,9 @@
 # Testing overall program function
-
+source("../fertilizer_function.R")
+source("../climate_function.R")      
+source("../soil_health_function.R")   
+source("../tomato_growth_function.R") 
+source("../overall_program_function.R")
 library(testthat)
 
 #Test 1

@@ -1,8 +1,3 @@
-#| label: functions
-#| include: true
-#| echo: false
-#| message: false
-#| 
 #' Overall Program - Tomato Crop Growth Prediction
 #'
 #' @param nitrogen nitrogen application rate (kg/ha)

@@ -1,4 +1,5 @@
 # Testing climate function
+source("../climate_function.R")  
 
 #Test 1
 test_that("climate score is numeric", {

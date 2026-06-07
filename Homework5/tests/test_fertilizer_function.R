@@ -1,5 +1,5 @@
 # Testing fertilizer function
-
+source("../fertilizer_function.R") 
 library(testthat)
 
 #Test 1

@@ -1,5 +1,5 @@
 #'test tomato growth function
-
+source("../tomato_growth_function.R") 
 library(testthat)
 
 #Test 1
