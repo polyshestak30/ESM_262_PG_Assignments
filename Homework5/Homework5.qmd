@@ -116,9 +116,9 @@ library(tidyverse)
 
 # Plot predicted tomato growth at each site
 plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) +
-  geom_point(color="red") +
   geom_line(color="grey") +
   geom_col(fill="pink") +
+  geom_point(color="red") +
   labs(
   title = "Tomato Plant Growth in 2025",
   x = "Tomato Plant ID",
