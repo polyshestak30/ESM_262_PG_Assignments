@@ -33,7 +33,7 @@ source("overall_program_function.R")
 #| message: false
 
 
-library(truncnorm) #package for truncated normal distrubutions which were used to create environmnetal values that cannot exceed realistic min and max values
+library(truncnorm) #package for truncated normal distributions which were used to create environmental values that cannot exceed realistic min and max values
 --------------------------------------------------------------------------------
 # Generate example plant growth data for 20 hypothetical agricultural plots
   
@@ -118,7 +118,7 @@ library(tidyverse)
 plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) +
   geom_point(color="red") +
   geom_line(color="grey") +
-  geom_col(fill="red") +
+  geom_col(fill="pink") +
   labs(
   title = "Tomato Plant Growth in 2025",
   x = "Tomato Plant ID",
