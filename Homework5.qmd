@@ -1,0 +1,167 @@
+---
+title: "Homework5"
+author: "Emma Sayre, Georgia Goldsmith, Poly Shestak"
+date: "May 18, 2026"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+## Step 1: Planning
+
+Module 1 - Fertilizer Suitability Score
+
+```{r}
+#| label: functions
+#| include: true
+#| echo: false
+#| message: false
+
+#' Module 1 - Fertilizer Suitability Score 
+#' 
+#' @param nitrogen nitr. application rate (kg/ha)
+#' @param phosphorus phos. application rate (kg/ha)
+#' @return fertilizer_score - fertilizer suitability score (0 to 3 in/yr)
+#' 
+#' nitrogen: optimal 100-200 kg/ha
+fertilizer_score = function(nitrogen, phosphorus) { if (nitrogen < 50 | nitrogen > 300) {
+  n_score = 0
+} else if (nitrogen >= 100 & nitrogen <= 200) {
+  n_score = 1.5 #optimal
+} else {
+  n_score = 0.75 #low or high but not extreme
+}
+  
+#phosphorus: optimal 30-80 kg/ha
+  if(phosphorus < 10 | phosphorus > 120) {
+    p_score = 0
+  } else if (phosphorus >= 30 & phosphorus <= 80) {
+    p_score = 1.5 
+  } else {
+    p_score = 0.75
+  }
+  
+  fertilizer_score = n_score + p_score 
+  return(fertilizer_score)
+}
+```
+
+Module 2 - Climate
+
+```{r}
+#| label: functions
+#| include: true
+#| echo: false
+#| message: false
+
+#' Module 2 - Climate
+#' 
+#' @param precip annual precipitation (in/yr)
+#' @param temp mean growing season temp (C)
+#' @return climate_score - climate suitability score (0 to 5 in/yr)
+#' 
+#' precip (optimal = 20-30in/yr)
+climate_score = function(precip, temp) {
+  if (precip < 5 | precip > 40) {
+    precip_score = 0
+  } else if (precip >=20 & precip <=30) {
+    precip_score = 2.5
+  } else {
+    precip_score = 1.25
+  }
+  
+# temp (optimal 60-80)
+  if(temp < 50 | temp > 90) {
+    temp_score = 0
+  } else if (temp >=60 & temp <=80) {
+    temp_score = 2.5 
+  } else {
+    temp_score = 1.25
+  }
+  }
+```
+
+Module 3 - Soil Health
+
+```{r}
+#| label: functions
+#| include: true
+#| echo: false
+#| message: false
+
+#' Module 3 - Soil Health Score
+#' @param pH soil pH (0 to 14)
+#' @param soil_om soil om content (%)
+#' @return soil_health_score - soil health suitability score (0 to 4 in/yr)
+#' 
+```
+
+Module 4 - Annual Tomato Crop Growth
+
+```{r}
+
+#| label: functions
+#| include: true
+#| echo: false
+#| message: false
+
+#' Module 4 - Tomato Crop Growth
+#' 
+#' @param fertilizer_score fert. suitability score (0-3in/yr)
+#' @param climate_score climate suitability score (0 to 5 in/yr)
+#' @param soil_health_score soil health score (0 to 4in/yr)
+#' @return tomato_growth - predicted tomato crop growht (0-12 in/yr)
+```
+
+Overall Program
+
+```{r}
+#| label: functions
+#| include: true
+#| echo: false
+#| message: false
+
+#' Overall Program
+#' Tomato Crop Growth Prediction
+#'
+#' @param nitrogen nitrogen application rate (kg/ha)
+#' @param phosphorus phosphorus application rate (kg/ha)
+#' @param precip annual precipitation (in/yr)
+#' @param temp mean growing season temperature (°C)
+#' @param pH soil pH (0 to 14)
+#' @param soil_om soil organic matter content (%)
+#' @return tomato_growth - predicted tomato crop growth (0 to 12 in/yr)
+#'
+```
+
+Test
+
+```{r}
+library(truncnorm)
+
+# Plant growth data
+plant_growth_data <- data.frame(
+  sample_num = 1:20,
+  nitrogen = rtruncnorm(20, a = 0, b = 400, mean = 70, sd = 100),
+  phosphorus = rtruncnorm(20, a = 0, b = 150, mean = 20, sd = 30),
+  precip = rtruncnorm(20, a = 4, b = 30, mean = 8, sd = 6),
+  temp = rtruncnorm(20, a = 45, b = 85, mean = 70, sd = 8),
+  ph = rtruncnorm(20, a = 3.5, b = 10, mean = 6, sd = 1),
+  soil_om = rtruncnorm(20, a = 0.01, b = 0.1, mean = 0.04, sd= 0.03))
+
+# Fertilizer score
+plant_growth_data$fertilizer_score <- mapply(fertilizer_score, plant_growth_data$nitrogen, plant_growth_data$phosphorus)
+plant_growth_data
+
+# Climate score
+plant_growth_data$climate_score <- mapply(climate_score, plant_growth_data$precip, plant_growth_data$temp)
+plant_growth_data
+
+# Soil health score
+
+# Annual tomoato crop growth
+
+
+
+```

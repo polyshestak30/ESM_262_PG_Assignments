@@ -33,19 +33,22 @@ source("overall_program_function.R")
 #| message: false
 
 
-library(truncnorm)
-
-# Plant growth data
+library(truncnorm) #package for truncated normal distrubutions which were used to create environmnetal values that cannot exceed realistic min and max values
+--------------------------------------------------------------------------------
+# Generate example plant growth data for 20 hypothetical agricultural plots
+  
 plant_growth_data <- data.frame(
-  plant_ID = 1:20,
-  nitrogen = rtruncnorm(20, a = 0, b = 400, mean = 70, sd = 100),
-  phosphorus = rtruncnorm(20, a = 0, b = 150, mean = 20, sd = 30),
-  precip = rtruncnorm(20, a = 4, b = 30, mean = 8, sd = 6),
-  temp = rtruncnorm(20, a = 45, b = 85, mean = 70, sd = 8),
-  ph = rtruncnorm(20, a = 3.5, b = 10, mean = 6, sd = 1),
-  soil_om = rtruncnorm(20, a = 0.01, b = 0.1, mean = 0.04, sd= 0.03))
+  plant_ID = 1:20, #unique ID for each observation
+  nitrogen = rtruncnorm(20, a = 0, b = 400, mean = 70, sd = 100), #distribution of nitrogen levels in soil samples (kg/ha)
+  phosphorus = rtruncnorm(20, a = 0, b = 150, mean = 20, sd = 30), #distribution of phosphorous levels in soil samples (kg/ha)
+  precip = rtruncnorm(20, a = 4, b = 30, mean = 8, sd = 6), #distribution of annual precipitation across sample sites (in/yr)
+  temp = rtruncnorm(20, a = 45, b = 85, mean = 70, sd = 8), #distribution of average growing temperature across sample sites (ºF)
+  ph = rtruncnorm(20, a = 3.5, b = 10, mean = 6, sd = 1), #distribution of soil pH level of samples
+  soil_om = rtruncnorm(20, a = 0.01, b = 0.1, mean = 0.04, sd= 0.03)) #distribution of soil organic matter concentration in samples
 
-# Fertilizer score
+--------------------------------------------------------------------------------
+# Calculate fertilizer suitability score
+# Applies
 plant_growth_data$fertilizer_score <- mapply(fertilizer_score, plant_growth_data$nitrogen, plant_growth_data$phosphorus)
 plant_growth_data
 
