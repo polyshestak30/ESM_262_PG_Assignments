@@ -5,10 +5,14 @@
 
 #' Module 3 - Soil Health Score
 #' @param ph soil pH (0 to 14)
-#' @param soil_om soil_om soil organic matter proportion (0 to 1)
-#' @return soil_health_score - soil health suitability score (0 to 4 in/yr)
+#' @param soil_om Soil organic matter proportion (0 to 1)
+#' @return soil_health_score: A numeric soil health score determines the amount of tomato growth
+#' that can be attributed to soil health based on pH and soil om (0 to 4 in/yr)
+#' where higher values indicate more suitable soil conditions for tomato growth
 #' 
-#' soil_health_score <- function(ph, soil_om) {
+#' @details
+#' pH is  optimal between 6-7
+#' Soil organic matter is optimal between 0.03-0.06
 
 # pH (optimal = 6-7)
 soil_health_score <- function(ph, soil_om) {

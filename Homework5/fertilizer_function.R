@@ -3,13 +3,19 @@
 #| echo: false
 #| message: false
 
-#' Module 1 - Fertilizer Suitability Score 
+library(roxygen2)
+
+#' Module 1 - Fertilizer Score 
 #' 
-#' @param nitrogen nitr. application rate (kg/ha)
-#' @param phosphorus phos. application rate (kg/ha)
-#' @return fertilizer_score - fertilizer suitability score (0 to 3 in/yr)
+#' @param nitrogen Nitrogen application rate (kg/ha)
+#' @param phosphorus Phosphorous application rate (kg/ha)
+#' @return fertilizer_score: A numeric fertilizer score determines the amount of tomato growth 
+#' that is attributed to fertilizer based on nitrogen and phosphorous inputs (0 to 3 in/yr) 
+#' where higher values indicate more suitable nutrient conditions for tomato growth
 #' 
-#' nitrogen: optimal 100-200 kg/ha
+#' @details
+#' Nitrogen is optimal between 100 and 200 kg/ha.
+#' Phosphorous is optimal between 30 and 80 kg/ha
 
 fertilizer_score <- function(nitrogen, phosphorus) {
   
