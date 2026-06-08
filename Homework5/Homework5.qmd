@@ -50,20 +50,15 @@ plant_growth_data <- data.frame(
 # Calculate fertilizer suitability score
 # Applies
 plant_growth_data$fertilizer_score <- mapply(fertilizer_score, plant_growth_data$nitrogen, plant_growth_data$phosphorus)
-plant_growth_data
 
 # Climate score
 plant_growth_data$climate_score <- mapply(climate_score, plant_growth_data$precip, plant_growth_data$temp)
-plant_growth_data
 
 # Soil health score
 plant_growth_data$soil_health_score <- mapply(
   soil_health_score,
   plant_growth_data$ph,
-  plant_growth_data$soil_om
-)
-
-plant_growth_data
+  plant_growth_data$soil_om)
 
 # Annual tomoato crop growth
 plant_growth_data$tomato_growth <- mapply(
@@ -73,16 +68,33 @@ plant_growth_data$tomato_growth <- mapply(
   plant_growth_data$precip,
   plant_growth_data$temp,
   plant_growth_data$ph,
-  plant_growth_data$soil_om
-)
+  plant_growth_data$soil_om)
 
 head(plant_growth_data)
 ```
 
-**Plot Results**
+**Test Functions**
 
 ```{r}
-#| label: run-program
+#| label: tests
+#| include: true
+#| echo: true
+#| message: true
+
+library(testthat)
+
+test_file("tests/test_fertilizer_function.R")
+test_file("tests/test_climate_function.R")
+test_file("tests/test_soil_health_function.R")
+test_file("tests/test_tomato_growth_function.R")
+test_file("tests/test_overall_program_function.R")
+
+```
+
+**Plot Tomato Plant Growth**
+
+```{r}
+#| label: plot
 #| include: true
 #| echo: true
 #| message: false
@@ -90,9 +102,10 @@ head(plant_growth_data)
 library(ggplot2)
 library(tidyverse)
 
-plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) + 
+plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) +
   geom_point(color="red") +
   geom_line(color="grey") +
+  geom_col(fill="red") +
   labs(
   title = "Tomato Plant Growth in 2025",
   x = "Tomato Plant ID",

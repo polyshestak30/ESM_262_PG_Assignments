@@ -91,10 +91,42 @@ Module 3 - Soil Health
 #| message: false
 
 #' Module 3 - Soil Health Score
+<<<<<<< HEAD
 #' @param pH soil pH (0 to 14)
 #' @param soil_om soil om content (%)
 #' @return soil_health_score - soil health suitability score (0 to 4 in/yr)
 #' 
+=======
+#' @param ph soil pH (0 to 14)
+#' @param soil_om soil om content (%)
+#' @return soil_health_score - soil health suitability score (0 to 4 in/yr)
+#' 
+soil_health_score <- function(ph, soil_om) {
+
+# pH (optimal = 6-7)
+if (ph < 5 | ph > 8) {
+  ph_score <- 0
+} else if (ph >= 6 & ph <= 7) {
+  ph_score <- 2
+} else {
+  ph_score <- 1
+}
+
+# soil organic matter (optimal = 0.03-0.06)
+if (soil_om < 0.01) {
+  om_score <- 0
+} else if (soil_om >= 0.03 & soil_om <= 0.06) {
+  om_score <- 2
+} else {
+  om_score <- 1
+}
+
+soil_health_score <- ph_score + om_score
+
+return(soil_health_score)
+}
+  
+>>>>>>> 9a398a218941d1714fecd25d783bc70afc85e8b6
 ```
 
 Module 4 - Annual Tomato Crop Growth
@@ -112,6 +144,16 @@ Module 4 - Annual Tomato Crop Growth
 #' @param climate_score climate suitability score (0 to 5 in/yr)
 #' @param soil_health_score soil health score (0 to 4in/yr)
 #' @return tomato_growth - predicted tomato crop growht (0-12 in/yr)
+<<<<<<< HEAD
+=======
+
+tomato_growth <- function(fertilizer_score, climate_score, soil_health_score) {
+  
+  tomato_growth <- fertilizer_score + climate_score + soil_health_score
+  
+  return(tomato_growth)
+}
+>>>>>>> 9a398a218941d1714fecd25d783bc70afc85e8b6
 ```
 
 Overall Program
@@ -132,7 +174,23 @@ Overall Program
 #' @param pH soil pH (0 to 14)
 #' @param soil_om soil organic matter content (%)
 #' @return tomato_growth - predicted tomato crop growth (0 to 12 in/yr)
+<<<<<<< HEAD
 #'
+=======
+
+predict_tomato_growth <- function(nitrogen, phosphorus, precip, temp, ph, soil_om) {
+  
+  fert <- fertilizer_score(nitrogen, phosphorus)
+  
+  clim <- climate_score(precip, temp)
+  
+  soil <- soil_health_score(ph, soil_om)
+  
+  growth <- tomato_growth(fert, clim, soil)
+  
+  return(growth)
+}
+>>>>>>> 9a398a218941d1714fecd25d783bc70afc85e8b6
 ```
 
 Test
@@ -159,9 +217,32 @@ plant_growth_data$climate_score <- mapply(climate_score, plant_growth_data$preci
 plant_growth_data
 
 # Soil health score
+<<<<<<< HEAD
 
 # Annual tomoato crop growth
 
+=======
+plant_growth_data$soil_health_score <- mapply(
+  soil_health_score,
+  plant_growth_data$ph,
+  plant_growth_data$soil_om
+)
+
+plant_growth_data
+
+# Annual tomoato crop growth
+plant_growth_data$tomato_growth <- mapply(
+  predict_tomato_growth,
+  plant_growth_data$nitrogen,
+  plant_growth_data$phosphorus,
+  plant_growth_data$precip,
+  plant_growth_data$temp,
+  plant_growth_data$ph,
+  plant_growth_data$soil_om
+)
+
+head(plant_growth_data)
+>>>>>>> 9a398a218941d1714fecd25d783bc70afc85e8b6
 
 
 ```
