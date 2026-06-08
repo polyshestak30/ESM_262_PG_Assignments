@@ -48,19 +48,29 @@ plant_growth_data <- data.frame(
 
 --------------------------------------------------------------------------------
 # Calculate fertilizer suitability score
-# Applies
+# Applies the fertilizer_score() function to each observation
+# Uses nitrogen and phosphorous levels
+# Higher values indicate fertilizer levels closer to optimal for plant growth
 plant_growth_data$fertilizer_score <- mapply(fertilizer_score, plant_growth_data$nitrogen, plant_growth_data$phosphorus)
 
-# Climate score
+# Calculate climate suitability score
+# Applies the climate_score() function to each observation
+# Uses precipitation and temperature data
+# Higher values indicate climate levels closer to optimal for plant growth
 plant_growth_data$climate_score <- mapply(climate_score, plant_growth_data$precip, plant_growth_data$temp)
 
-# Soil health score
+# Calculate soil health score
+# Applies the soil_health_score() function to each observation
+# Uses soil pH and soil organic matter
+# Higher values indicate soil quality closer to optimal for plant growth
 plant_growth_data$soil_health_score <- mapply(
   soil_health_score,
   plant_growth_data$ph,
   plant_growth_data$soil_om)
 
-# Annual tomoato crop growth
+# Predict annual tomato crop growth
+# Applies predict_tomato_growth() function to each observation
+# Combines fertilizer, climate, and soil conditions to estimate annual tomato growth for each observation
 plant_growth_data$tomato_growth <- mapply(
   predict_tomato_growth,
   plant_growth_data$nitrogen,
@@ -83,6 +93,8 @@ head(plant_growth_data)
 
 library(testthat)
 
+# Applies tests developed for each function 
+
 test_file("tests/test_fertilizer_function.R")
 test_file("tests/test_climate_function.R")
 test_file("tests/test_soil_health_function.R")
@@ -102,6 +114,7 @@ test_file("tests/test_overall_program_function.R")
 library(ggplot2)
 library(tidyverse)
 
+# Plot predicted tomato growth at each site
 plant_growth_plot <- ggplot(plant_growth_data, aes(x=plant_ID, y=tomato_growth)) +
   geom_point(color="red") +
   geom_line(color="grey") +
